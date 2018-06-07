@@ -1,0 +1,30 @@
+server:
+  port: 8073
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    servlet:
+      content-type: text/html
+  datasource:
+    url: jdbc:log4jdbc:mysql:///excelplug?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    username: root
+    password: 123456
+    driver-class-name: net.sf.log4jdbc.DriverSpy
+  jpa:
+      show-sql: true
+      hibernate:
+         ddl-auto: update
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+      generate-ddl: true
+      properties:
+          hibernate:
+              format_sql: true
+
+#文件上传路径
+file:
+  upload:
+    path: F:/fileupload

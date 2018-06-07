@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <head>
+        <meta charset="utf-8">
+        <title>layui</title>
+        <meta name="renderer" content="webkit">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link th:href="@{/css/layui.css}" rel="stylesheet" href="../static/css/layui.css"  media="all">
+    </head>
+</head>
+<style>
+    .className{
+        width:50%;
+        height:50%;
+        margin:0 auto;
+    }
+</style>
+<body>
+    <div class="className">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+            <legend>配置文件</legend>
+        </fieldset>
+        <form class="layui-form" action="/cofigs" method="post">
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称</label>
+                <div class="layui-input-inline">
+                    <select name="projectName" lay-verify="required">
+                        <option value=""></option>
+                        <option value="香海大桥">香海大桥</option>
+                        <option value="鸿鹤大桥">鸿鹤大桥</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">标段</label>
+                <div class="layui-input-inline">
+                    <select name="tenders" lay-verify="required">
+                        <option value=""></option>
+                        <option value="TJ1标">TJ1标</option>
+                        <option value="TJ2标">TJ2标</option>
+                        <option value="TJ3标">TJ3标</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">生产线</label>
+                <div class="layui-input-inline">
+                    <select name="lineNumber" lay-verify="required">
+                        <option value=""></option>
+                        <option value="HXTJ1-1-1#">HXTJ1-1-1#</option>
+                        <option value="HXTJ1-1-2#">HXTJ1-1-2#</option>
+                        <option value="HXTJ1-1-3#">HXTJ1-1-3#</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">数据库类型</label>
+                <div class="layui-input-inline">
+                    <select lay-filter="dbType" name="dbType" lay-verify="required">
+                        <option value=""></option>
+                        <option value="sqlserver">sqlserver</option>
+                        <option value="access">access</option>
+                    </select>
+                </div>
+            </div>
+            <div  id="dbName" class="layui-form-item layui-hide">
+                <label class="layui-form-label">数据库名</label>
+                <div class="layui-input-inline">
+                    <input name="dbName" placeholder="输入数据库名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div  id="userName" class="layui-form-item layui-hide">
+                <label class="layui-form-label">用户名</label>
+                <div class="layui-input-inline">
+                    <input name="userName" placeholder="输入数据库用户名" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div id="password" class="layui-form-item layui-hide">
+                <label  class="layui-form-label">密码</label>
+                <div class="layui-input-inline">
+                    <input type="password" name="dbPassword" lay-verify="required" placeholder="输入数据库密码" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div  id="dbAccessPath" class="layui-form-item layui-hide">
+                <label class="layui-form-label">数据库路径</label>
+                <div class="layui-input-inline">
+                    <input name="dbAccessPath"  placeholder="输入Access数据库路径" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+            <!--<input type="submit" value="Submit" />-->
+        </form>
+    </div>
+
+</body>
+<script th:src="@{/layui.js}" src="../static/layui.js"></script>
+<script th:src="@{/js/jquery-3.1.1.min.js}" src="../static/js/jquery-3.1.1.min.js"></script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form;
+        form.on('select(dbType)', function(data){
+            if(data.value=="sqlserver"){
+                $('#dbAccessPath').addClass('layui-hide');
+                $('#dbName').removeClass('layui-hide');
+                $('#userName').removeClass('layui-hide');
+                $('#password').removeClass('layui-hide');
+            }
+            if(data.value=="access"){
+                $('#dbName').addClass('layui-hide');
+                $('#userName').addClass('layui-hide');
+                $('#password').addClass('layui-hide');
+                $('#dbAccessPath').removeClass('layui-hide');
+            }
+
+        });
+        // form.render();
+        //监听提交
+        // form.on('submit(formDemo)', function(data){
+        //     alert("nihao");
+        //     layer.msg(JSON.stringify(data.field));
+        //     return false;
+        // });
+    });
+
+
+</script>
+</html>
